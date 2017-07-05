@@ -1,0 +1,49 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Bands</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="shorcut icon" type="image/x-icon" href="images/favicon.ico">
+        <style>
+            div#results {
+                position: absolute;
+                border: solid 2px red; margin:7px; 
+                padding: 5px;
+                background-color: #000000;
+                color: white;
+                width: 20%;
+                left: 40%;
+            } 
+		</style>
+    </head>      
+	<body>
+		<h1 align="middle"> Καταγραφή στοιχείων</h1>
+		<div id="results"> Εδώ θα εμφανιστούν οι καταχωρήσεις: <br>
+            -----------------------------------------------
+        
+        <script>
+            var qd = {};
+            location.search.substr(1).split("&").forEach(function(item) {var k = item.split("=")[0], v = decodeURIComponent(item.split("=")[1]); (k in qd) ? qd[k].push(v) : qd[k] = [v]})
+            
+            function appendTo(ID,Text){
+                var x = document.getElementById(ID);
+                x.innerHTML = x.innerHTML + "<br/>" + "- " + Text + "<br />";
+            }
+            
+            var name = qd.name[0].replace(/\+/g, ' ');
+            var age = qd.age[0];
+            var info = qd.info[0] + ", " + qd.info[1];
+            var perioxi = qd.perioxi[0] + ", " + qd.perioxi[1] + ", " + qd.perioxi[2] + ", " + qd.perioxi[3];
+            var mail = qd.mail[0];
+            
+            appendTo("results", name);
+            appendTo("results", age);
+            appendTo("results", info.replace(/, undefined/gi, ''));
+            appendTo("results", perioxi.replace(/, undefined/gi, ''));
+            appendTo("results", mail);
+           
+		</script>
+        </div>
+    </body>
+</html>
